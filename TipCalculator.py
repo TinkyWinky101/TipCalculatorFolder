@@ -12,6 +12,7 @@ class TipGui:
 
         #Enter the amount that the service costs here
         self.servicePriceEntry1 = Entry(self.master)
+        
         self.servicePriceEntry1.grid(row=0, column=1, sticky=E)
 
         self.tipOutput1 = Label(self.master, text = "Tip 1:")
@@ -41,7 +42,7 @@ class TipGui:
         self.servicePriceEntry3.grid(row=2, column=1, sticky=E)
 
         self.tipOutput3 = Label(self.master, text = "Tip 3:")
-        self.tipOutput1.grid(row = 2, column=2, sticky=E)
+        self.tipOutput3.grid(row = 2, column=2, sticky=E)
 
         self.tipResult3 = Entry(self.master)
         self.tipResult3.config(state="disabled")
@@ -66,34 +67,34 @@ class TipGui:
         self.servicePriceEntry5 = Entry(self.master)
         self.servicePriceEntry5.grid(row=4, column=1, sticky=E)
 
-        self.tipOutput5 = Label(self.master, text = "Tip 2:")
+        self.tipOutput5 = Label(self.master, text = "Tip 5:")
         self.tipOutput5.grid(row = 4, column=2, sticky=E)
 
         self.tipResult5 = Entry(self.master)
         self.tipResult5.config(state="disabled")
         self.tipResult5.grid(row=4, column=3, sticky=E)
 
-        self.serviceLabel6 = Label(self.master, text = "Service Cost 2:")
+        self.serviceLabel6 = Label(self.master, text = "Service Cost 6:")
         self.serviceLabel6.grid(row = 5, column=0, sticky=E)
 
         self.servicePriceEntry6 = Entry(self.master)
         self.servicePriceEntry6.grid(row=5, column=1, sticky=E)
 
-        self.tipOutput6 = Label(self.master, text = "Tip 2:")
+        self.tipOutput6 = Label(self.master, text = "Tip 6:")
         self.tipOutput6.grid(row = 5, column=2, sticky=E)
 
         self.tipResult6 = Entry(self.master)
         self.tipResult6.config(state="disabled")
         self.tipResult6.grid(row=5, column=3, sticky=E)
 
-        self.tipEntry = Entry(self.master)
-        self.tipEntry.grid(row=7, column=0, sticky=E)
         
         #Button
-        self.calculateButton = Button(self.master, text = "Calculate tip", command = self.calculateTip())
+        self.calculateButton = Button(self.master, text = "Calculate tip", command = self.calculateTip)
+        self.calculateButton.grid(row = 7, column = 0, sticky = E)
 
 
     def calculateTip(self):
+        serviceTotal = 0
         getLabel = {
             1 : self.servicePriceEntry1.get(),
             2 : self.servicePriceEntry2.get(),
@@ -103,7 +104,7 @@ class TipGui:
             6 : self.servicePriceEntry6.get()
         }
 
-        for i in range(0,6):
+        for i in range(1,7):
             if getLabel[i] != "":
                 serviceTotal += getLabel[i]
         
@@ -130,7 +131,7 @@ class TipGui:
             5 : self.servicePriceEntry5.get(),
             6 : self.servicePriceEntry6.get()
         }   
-        for i in range(0, 6):
+        for i in range(1, 7):
             if getLabel[i] != "":
                 calculate = getLabel[i] / total
                 getEntry[i].config(state="enabled")
