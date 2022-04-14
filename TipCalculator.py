@@ -105,9 +105,41 @@ class TipGui:
 
         for i in range(0,6):
             if getLabel[i] != "":
-                total += getLabel[i]
+                serviceTotal += getLabel[i]
         
-        if total == 0:
+        if serviceTotal == 0:
             messagebox.showerror("ERROR", "No services added")
         else:
-            
+            self.enterTips(serviceTotal)
+
+    def enterTips(self, total):
+        getEntry = {
+            1 : self.tipResult1,
+            2 : self.tipResult2,
+            3 : self.tipResult3,
+            4 : self.tipResult4,
+            5 : self.tipResult5,
+            6 : self.tipResult6
+        }
+
+        getLabel = {
+            1 : self.servicePriceEntry1.get(),
+            2 : self.servicePriceEntry2.get(),
+            3 : self.servicePriceEntry3.get(),
+            4 : self.servicePriceEntry4.get(),
+            5 : self.servicePriceEntry5.get(),
+            6 : self.servicePriceEntry6.get()
+        }   
+        for i in range(0, 6):
+            if getLabel[i] != "":
+                calculate = getLabel[i] / total
+                getEntry[i].config(state="enabled")
+                getEntry[i].delete(0, END)
+                getEntry[i].insert(0, str(calculate))
+                getEntry[i].config(state="disabled")
+        
+    
+if __name__ == '__main__':
+    myTkRoot = Tk()
+    my_gui = TipGui(myTkRoot)
+    myTkRoot.mainloop()
