@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 class TipGui:
     def __init__(self,root):
@@ -34,7 +35,7 @@ class TipGui:
         self.tipResult2.grid(row=1, column=3, sticky=E)
 
         self.serviceLabel3 = Label(self.master, text = "Service Cost 3:")
-        self.serviceLabel1.grid(row = 2, column=0, sticky=E)
+        self.serviceLabel3.grid(row = 2, column=0, sticky=E)
 
         self.servicePriceEntry3 = Entry(self.master)
         self.servicePriceEntry3.grid(row=2, column=1, sticky=E)
@@ -93,6 +94,20 @@ class TipGui:
 
 
     def calculateTip(self):
-        if
+        getLabel = {
+            1 : self.servicePriceEntry1.get(),
+            2 : self.servicePriceEntry2.get(),
+            3 : self.servicePriceEntry3.get(),
+            4 : self.servicePriceEntry4.get(),
+            5 : self.servicePriceEntry5.get(),
+            6 : self.servicePriceEntry6.get()
+        }
 
-    def checkIfZero(self):
+        for i in range(0,6):
+            if getLabel[i] != "":
+                total += getLabel[i]
+        
+        if total == 0:
+            messagebox.showerror("ERROR", "No services added")
+        else:
+            
