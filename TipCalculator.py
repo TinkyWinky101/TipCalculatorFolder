@@ -87,10 +87,16 @@ class TipGui:
         self.tipResult6.config(state="disabled")
         self.tipResult6.grid(row=5, column=3, sticky=E)
 
+        #Enter full tip here
+        self.fullTipLabel = Label(self.master, text = "Full Tip")
+        self.fullTipLabel.grid(row= 6, column = 0, sticky=E)
+
+        self.fullTipEntry = Entry(self.master)
+        self.fullTipEntry.grid(row = 6, column = 1, sticky = E)
         
         #Button
         self.calculateButton = Button(self.master, text = "Calculate tip", command = self.calculateTip)
-        self.calculateButton.grid(row = 7, column = 0, sticky = E)
+        self.calculateButton.grid(row = 8, column = 0, sticky = E)
 
 
     def calculateTip(self):
@@ -106,14 +112,15 @@ class TipGui:
 
         for i in range(1,7):
             if getLabel[i] != "":
-                serviceTotal += getLabel[i]
+                serviceTotal += int(getLabel[i])
         
         if serviceTotal == 0:
             messagebox.showerror("ERROR", "No services added")
         else:
-            self.enterTips(serviceTotal)
+            userFullTip = int(self.fullTipEntry.get())
+            self.enterTips(serviceTotal, userFullTip)
 
-    def enterTips(self, total):
+    def enterTips(self, total, fullTip):
         getEntry = {
             1 : self.tipResult1,
             2 : self.tipResult2,
@@ -133,8 +140,9 @@ class TipGui:
         }   
         for i in range(1, 7):
             if getLabel[i] != "":
-                calculate = getLabel[i] / total
-                getEntry[i].config(state="enabled")
+                percentage = int(getLabel[i]) / total
+                calculate = fullTip * percentage
+                getEntry[i].config(state="normal")
                 getEntry[i].delete(0, END)
                 getEntry[i].insert(0, str(calculate))
                 getEntry[i].config(state="disabled")
